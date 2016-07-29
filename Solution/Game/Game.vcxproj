@@ -42,13 +42,13 @@
     <OutDir>$(SolutionDir)..\Libs\</OutDir>
     <IntDir>$(SolutionDir)..\temp\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(SolutionDir)\CommonUtilities;$(SolutionDir)\Entity;$(SolutionDir)\PostMaster;$(SolutionDir)\Engine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\CommonUtilities;$(SolutionDir)\Entity;$(SolutionDir)\PostMaster;$(SolutionDir)..\ThirdParty\Engine\Include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\Libs\</OutDir>
     <IntDir>$(SolutionDir)..\temp\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(SolutionDir)\CommonUtilities;$(SolutionDir)\Entity;$(SolutionDir)\PostMaster;$(SolutionDir)\Engine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\CommonUtilities;$(SolutionDir)\Entity;$(SolutionDir)\PostMaster;$(SolutionDir)..\ThirdParty\Engine\Include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,9 +96,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CommonUtilities\CommonUtilities.vcxproj">
       <Project>{32412318-0112-4dce-87c5-86ca64df6630}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Engine\Engine.vcxproj">
-      <Project>{0f706091-0f34-4fcd-b5e7-dfdd141a45b6}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.vcxproj">
       <Project>{fe86362f-e4c6-422a-9d7e-123ae160651e}</Project>
