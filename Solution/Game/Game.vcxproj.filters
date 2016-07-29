@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="stdafx.h">
+      <Filter>Precompile</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Precompile</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Precompile">
+      <UniqueIdentifier>{3c94b6b0-c318-47e6-b9dc-f30a78330a8e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="CommonHelper.h" />
+    <ClInclude Include="FileWatcher.h" />
+    <ClInclude Include="Macros.h" />
+    <ClInclude Include="Tweener.h" />
+    <ClInclude Include="AABB.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Fov90Frustum.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="LineSegment2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="LineSegment3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="LineVolume.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Intersection.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MathHelper.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix33.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix33decl.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix44decl.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneVolume.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2decl.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3decl.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4decl.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DL_Assert.h">
+      <Filter>DL_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DL_Debug.h">
+      <Filter>DL_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DL_StackWalker.h">
+      <Filter>DL_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="InputWrapper.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeOwn.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="GrowingArray.h">
+      <Filter>Array</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticArray.h">
+      <Filter>Array</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorOnStack.h">
+      <Filter>Array</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzySet.h">
+      <Filter>Array</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLReader.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="Greater.h">
+      <Filter>Heap</Filter>
+    </ClInclude>
+    <ClInclude Include="Heap.h">
+      <Filter>Heap</Filter>
+    </ClInclude>
+    <ClInclude Include="Lesser.h">
+      <Filter>Heap</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Precompile</Filter>
+    </ClInclude>
+    <ClInclude Include="StackWalker.h">
+      <Filter>DL_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Murmur.h" />
+    <ClInclude Include="CUMap.h" />
+    <ClInclude Include="CUStringDecl.h" />
+    <ClInclude Include="CUString.h" />
+    <ClInclude Include="CUMapIterator.h" />
+    <ClInclude Include="HashHelper.h" />
+    <ClInclude Include="FileStream.h" />
+    <ClInclude Include="EngineTypes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FileWatcher.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="MathHelper.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="DL_Debug.cpp">
+      <Filter>DL_Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="DL_StackWalker.cpp">
+      <Filter>DL_Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="InputWrapper.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeOwn.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzySet.cpp">
+      <Filter>Array</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLReader.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Precompile</Filter>
+    </ClCompile>
+    <ClCompile Include="StackWalker.cpp">
+      <Filter>DL_Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Murmur.cpp" />
+    <ClCompile Include="FileStream.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Math">
+      <UniqueIdentifier>{72f89729-f779-430d-904c-e51e39e85272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DL_Debug">
+      <UniqueIdentifier>{0781bd7a-f0d1-4b79-a016-7854bfc551fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{b6fa885d-1496-4da5-8754-38f413d3cb7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{f3d984d8-6bc3-427d-9ac6-d9761d6cb3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Array">
+      <UniqueIdentifier>{6466bad8-7494-4302-bd5f-3aa970d8e63a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{727861b2-0aa0-4992-8097-cf299bae4348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Heap">
+      <UniqueIdentifier>{10316e81-a4e8-4ad8-a930-d630db224ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile">
+      <UniqueIdentifier>{c8d857d1-9b94-452c-9c24-b699cb801b1e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

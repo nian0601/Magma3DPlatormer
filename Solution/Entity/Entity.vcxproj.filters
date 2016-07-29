@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Precompile">
+      <UniqueIdentifier>{cfac0ac8-c49d-45ec-92cb-0c40d80b2695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Processors">
+      <UniqueIdentifier>{6fbbc4d9-ed10-4fb8-899d-db1dcb0408dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{8e3333e1-e68a-472f-b281-fc48647451dd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Precompile</Filter>
+    </ClCompile>
+    <ClCompile Include="TranslationComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderProcessor.cpp">
+      <Filter>Processors</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InputProcessor.cpp">
+      <Filter>Processors</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Precompile</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslationComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderProcessor.h">
+      <Filter>Processors</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InputProcessor.h">
+      <Filter>Processors</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
