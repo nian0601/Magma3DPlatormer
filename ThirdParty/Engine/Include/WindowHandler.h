@@ -1,5 +1,6 @@
 #pragma once
 #include <Vector.h>
+#include <CUString.h>
 
 namespace Magma
 {
@@ -16,6 +17,8 @@ namespace Magma
 
 		HWND GetHwnd() const;
 		const CU::Vector2<float>& GetNewSize() const;
+
+		void SetTitle(const CU::String& aText);
 
 	private:
 

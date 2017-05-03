@@ -106,5 +106,11 @@ namespace CU
 			float distance2 = CU::Length2(aVector2 - aVector1);
 			return distance2 <= anEpsilon * anEpsilon;
 		}
+
+		void Round(float& aValue)
+		{
+			aValue = static_cast<float>(static_cast<int>(aValue + 0.5f));
+		}
+
 	}
 }

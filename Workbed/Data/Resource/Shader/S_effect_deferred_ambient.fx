@@ -1,6 +1,6 @@
 #include "S_u_variables.fx"
 
-float4 PixelShader_Deferred_Ambient(Pixel_FullscreenQuad aInput) : SV_Target
+float4 PixelShader_Deferred_Ambient(Pixel_Quad aInput) : SV_Target
 {
 	PBLData data = CalculatePBLData_GBuffer(aInput.Tex);
 	float3 ToEye = normalize(CameraPosition - data.WorldPosition.xyz);

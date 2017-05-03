@@ -62,6 +62,10 @@ namespace Magma
 
 		CU::Vector2<float> myWindowSize;
 		bool myIsRunning;
+
+
+		int FPS;
+		float DT;
 	};
 
 	inline GPUContext& Engine::GetGPUContext()

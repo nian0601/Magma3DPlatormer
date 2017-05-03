@@ -19,7 +19,7 @@ namespace CU
 
 		inline const Type& operator[](const int& aIndex) const;
 		inline Type& operator[](const int& aIndex);
-
+		inline int Count() const { return Size; };
 
 		// Utility functions
 		inline void Insert(int aIndex, Type& aObject);

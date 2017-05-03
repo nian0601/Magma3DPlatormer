@@ -1,8 +1,8 @@
 #include "S_effect_deferred_ambient.fx"
 
-Pixel_FullscreenQuad VertexShader_FullscreenQuad(Vertex_FullscreenQuad aInput)
+Pixel_Quad VertexShader_FullscreenQuad(Vertex_Quad aInput)
 {
-	Pixel_FullscreenQuad output = (Pixel_FullscreenQuad)0;
+	Pixel_Quad output = (Pixel_Quad)0;
 
 	output.Tex = aInput.Tex;
 	output.Pos = aInput.Pos;
@@ -10,7 +10,7 @@ Pixel_FullscreenQuad VertexShader_FullscreenQuad(Vertex_FullscreenQuad aInput)
 	return output;
 }
 
-float4 PixelShader_FullscreenQuad(Pixel_FullscreenQuad aInput) : SV_Target
+float4 PixelShader_FullscreenQuad(Pixel_Quad aInput) : SV_Target
 {
 	return float4(0.75f, 0.33f, 0.25f, 1.f);
 }

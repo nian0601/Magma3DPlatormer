@@ -54,6 +54,8 @@ namespace CU
 		unsigned int ClosestPowerOfTwo(unsigned int aValue);
 
 		bool DistanceBetweenLessThanOrEqualToEpsilon(const CU::Vector3<float>& aVector1, const CU::Vector3<float>& aVector2, float anEpsilon);
+
+		void Round(float& aValue);
 	}
 }
 

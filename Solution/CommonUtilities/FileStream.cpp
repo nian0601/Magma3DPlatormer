@@ -6,10 +6,10 @@
 
 namespace CU
 {
-	FileStream::FileStream(const CU::String<64>& aFilePath, int aFlags)
+	FileStream::FileStream(const CU::String& aFilePath, int aFlags)
 		: myFlags(aFlags)
 	{
-		CU::String<3> flags;
+		CU::String flags;
 		if (aFlags & eFlag::READ)
 		{
 			DL_ASSERT_EXP((aFlags & eFlag::WRITE) == false, "Cant open FileStream as both READ and WRITE");
@@ -26,7 +26,7 @@ namespace CU
 		}
 
 		errno_t result = fopen_s(&myFileHandle, aFilePath.c_str(), flags.c_str());
-		DL_ASSERT_EXP(result == 0, CU::Concatenate<256>("Failed to open FileStream: %s", aFilePath.c_str()));
+		DL_ASSERT_EXP(result == 0, CU::Concatenate("Failed to open FileStream: %s", aFilePath.c_str()));
 		if (result != 0)
 		{
 			fclose(myFileHandle);
@@ -57,6 +57,14 @@ namespace CU
 		fwrite(&aValue, sizeof(char), 1, myFileHandle);
 	}
 
+	void FileStream::Write(const CU::String& aValue)
+	{
+		DL_ASSERT_EXP(IsFlagged(eFlag::WRITE), "Cant Write to a Stream not opened with WRITE");
+		Write(aValue.Size());
+		fwrite(&aValue, sizeof(aValue), 1, myFileHandle);
+
+	}
+
 	void FileStream::Read(int &aValue)
 	{
 		DL_ASSERT_EXP(IsFlagged(eFlag::READ), "Cant Read from a Stream not opened with READ");
@@ -73,6 +81,16 @@ namespace CU
 	{
 		DL_ASSERT_EXP(IsFlagged(eFlag::READ), "Cant Read from a Stream not opened with READ");
 		fread_s(&aValue, sizeof(char), sizeof(char), 1, myFileHandle);
+	}
+
+	void FileStream::Read(CU::String& aValue)
+	{
+		DL_ASSERT_EXP(IsFlagged(eFlag::READ), "Cant Read from a Stream not opened with READ");
+		int lenght = 0;
+		Read(lenght);
+		aValue.Resize(lenght);
+
+		fread_s(&aValue.myData, sizeof(char) * lenght, sizeof(char), lenght, myFileHandle);
 	}
 
 	void FileStream::Close()

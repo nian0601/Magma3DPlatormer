@@ -19,6 +19,7 @@ namespace Magma
 		void AddEntity();
 
 		void AddComponent(Entity aEntity, BaseComponent* aComponent, unsigned int aComponentID);
+		void RemoveComponent(Entity aEntity, unsigned int aComponentID);
 		BaseComponent& GetComponent(Entity aEntity, unsigned int aComponentID);
 		bool HasComponent(Entity aEntity, unsigned int aComponentID);
 

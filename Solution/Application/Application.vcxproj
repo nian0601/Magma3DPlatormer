@@ -84,9 +84,6 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonUtilities\CommonUtilities.vcxproj">
-      <Project>{32412318-0112-4dce-87c5-86ca64df6630}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Game\Game.vcxproj">
       <Project>{d19e4f72-cade-4aed-8ef1-835407517fc0}</Project>
     </ProjectReference>

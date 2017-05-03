@@ -1,6 +1,6 @@
 #pragma once
 #include <Entity/Include/BaseComponent.h>
-#include <EngineTypes.h>
+#include <Types.h>
 
 class RenderComponent : public Magma::BaseComponent
 {

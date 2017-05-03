@@ -1,14 +1,14 @@
 #include "stdafx.h"
 
-#include <Rendering/AssetContainer.h>
-#include <Rendering/Camera.h>
-#include <Rendering/DeferredRenderer.h>
+#include <AssetContainer.h>
+#include <Camera.h>
+#include <DeferredRenderer.h>
 #include <Engine.h>
 #include "Game.h"
 #include <MathHelper.h>
 #include <PostMaster.h>
 #include <RenderMessage.h>
-#include <Rendering/RendererProxy.h>
+#include <RendererProxy.h>
 #include <XMLReader.h>
 
 #include <RenderComponent.h>
@@ -28,6 +28,7 @@ Game::Game()
 
 Game::~Game()
 {
+	PostMaster::GetInstance()->UnSubscribe(this, eMessageType::RENDER);
 	PostMaster::GetInstance()->Destroy();
 }
 
@@ -42,6 +43,8 @@ void Game::Init(Magma::Engine& aEngine)
 
 	myWorld.AddProcessor<RenderProcessor>();
 	myWorld.AddProcessor<InputProcessor>();
+
+	PostMaster::GetInstance()->Subscribe(this, eMessageType::RENDER);
 }
 
 bool Game::Update(float aDelta)

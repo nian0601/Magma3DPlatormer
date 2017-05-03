@@ -13,10 +13,10 @@ public:
 	XMLReader();
 	~XMLReader();
 
-	void OpenDocument(const CU::String<80>& aFilePath);
+	void OpenDocument(const CU::String& aFilePath);
 	void CloseDocument();
 
-	CU::String<80> GetElementName(tinyxml2::XMLElement* aElement);
+	CU::String GetElementName(tinyxml2::XMLElement* aElement);
 
 
 
@@ -30,12 +30,12 @@ public:
 	a nullptr will be returned
 	*/
 
-	tinyxml2::XMLElement* FindFirstChild(const CU::String<80>& aChildName);
+	tinyxml2::XMLElement* FindFirstChild(const CU::String& aChildName);
 	tinyxml2::XMLElement* FindFirstChild(tinyxml2::XMLElement* aParent) const;
-	tinyxml2::XMLElement* FindFirstChild(tinyxml2::XMLElement* aParent, const CU::String<80>& aChildName) const;
-	tinyxml2::XMLElement* FindNextElement(const CU::String<80>& aElementName);
+	tinyxml2::XMLElement* FindFirstChild(tinyxml2::XMLElement* aParent, const CU::String& aChildName) const;
+	tinyxml2::XMLElement* FindNextElement(const CU::String& aElementName);
 	tinyxml2::XMLElement* FindNextElement(tinyxml2::XMLElement* aPrevElement) const;
-	tinyxml2::XMLElement* FindNextElement(tinyxml2::XMLElement* aPrevElement, const CU::String<80>& aElementName) const;
+	tinyxml2::XMLElement* FindNextElement(tinyxml2::XMLElement* aPrevElement, const CU::String& aElementName) const;
 
 
 
@@ -52,12 +52,12 @@ public:
 	the DebugLogger about the involved Parent, Child, Element and Document
 	*/
 
-	tinyxml2::XMLElement* ForceFindFirstChild(const CU::String<80>& aChildName);
+	tinyxml2::XMLElement* ForceFindFirstChild(const CU::String& aChildName);
 	tinyxml2::XMLElement* ForceFindFirstChild(tinyxml2::XMLElement* aParent) const;
-	tinyxml2::XMLElement* ForceFindFirstChild(tinyxml2::XMLElement* aParent, const CU::String<80>& aChildName) const;
-	tinyxml2::XMLElement* ForceFindNextElement(const CU::String<80>& aElementName);
+	tinyxml2::XMLElement* ForceFindFirstChild(tinyxml2::XMLElement* aParent, const CU::String& aChildName) const;
+	tinyxml2::XMLElement* ForceFindNextElement(const CU::String& aElementName);
 	tinyxml2::XMLElement* ForceFindNextElement(tinyxml2::XMLElement* aPrevElement) const;
-	tinyxml2::XMLElement* ForceFindNextElement(tinyxml2::XMLElement* aPrevElement, const CU::String<80>& aElementName) const;
+	tinyxml2::XMLElement* ForceFindNextElement(tinyxml2::XMLElement* aPrevElement, const CU::String& aElementName) const;
 
 
 
@@ -73,19 +73,19 @@ public:
 	the program wont crash or even produce an error.
 	*/
 
-	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, CU::String<80>& aTargetVariable);
-	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, int& aTargetVariable);
-	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, float& aTargetVariable);
-	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, double& aTargetVariable);
-	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, bool& aTargetVariable);
+	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, CU::String& aTargetVariable);
+	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, int& aTargetVariable);
+	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, float& aTargetVariable);
+	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, double& aTargetVariable);
+	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, bool& aTargetVariable);
 
 	template<typename T>
-	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead
-			, const CU::String<80>& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable);
+	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead
+			, const CU::String& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable);
 
 	template<typename T>
-	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aFirst
-		, const CU::String<80>& aSecond, const CU::String<80>& aThird, CU::Vector3<T>& aTargetVariable);
+	bool ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aFirst
+		, const CU::String& aSecond, const CU::String& aThird, CU::Vector3<T>& aTargetVariable);
 
 
 
@@ -101,20 +101,20 @@ public:
 	error message to the DebugLogger about the involved Element, Attribute and Document.
 	*/
 
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, CU::String<80>& aTargetVariable);
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, int& aTargetVariable);
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, unsigned int& aTargetVariable);
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, float& aTargetVariable);
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, double& aTargetVariable);
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, bool& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, CU::String& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, int& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, unsigned int& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, float& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, double& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, bool& aTargetVariable);
 
 	template<typename T>
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead
-		, const CU::String<80>& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead
+		, const CU::String& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable);
 
 	template<typename T>
-	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aFirst
-		, const CU::String<80>& aSecond, const CU::String<80>& aThird, CU::Vector3<T>& aTargetVariable);
+	bool ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aFirst
+		, const CU::String& aSecond, const CU::String& aThird, CU::Vector3<T>& aTargetVariable);
 
 private:
 
@@ -130,22 +130,22 @@ private:
 	the requested Child/Element was found and crashes otherwise.
 	*/
 
-	void DebugFirstChild(const CU::String<80>& aChildName);
+	void DebugFirstChild(const CU::String& aChildName);
 	void DebugFirstChild(tinyxml2::XMLElement* aParent) const;
-	void DebugFirstChild(tinyxml2::XMLElement* aParent, const CU::String<80>& aChildName) const;
+	void DebugFirstChild(tinyxml2::XMLElement* aParent, const CU::String& aChildName) const;
 
-	void DebugNextElement(const CU::String<80>& aChildName);
+	void DebugNextElement(const CU::String& aChildName);
 	void DebugNextElement(tinyxml2::XMLElement* aParent) const;
-	void DebugNextElement(tinyxml2::XMLElement* aParent, const CU::String<80>& aChildName) const;
+	void DebugNextElement(tinyxml2::XMLElement* aParent, const CU::String& aChildName) const;
 
 
 	tinyxml2::XMLDocument* myDoc;
-	CU::String<80> myFilePath;
+	CU::String myFilePath;
 	bool myHasOpenedDoc;
 };
 
 template<typename T>
-bool XMLReader::ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead, const CU::String<80>& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable)
+bool XMLReader::ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead, const CU::String& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable)
 {
 	if (myHasOpenedDoc == false)
 		DL_ASSERT("[XMLReader]: Tried to [ReadAttribute(Vector2<T>)] before Opening the document");
@@ -166,7 +166,7 @@ bool XMLReader::ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, co
 }
 
 template<typename T>
-bool XMLReader::ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aFirst, const CU::String<80>& aSecond, const CU::String<80>& aThird, CU::Vector3<T>& aTargetVariable)
+bool XMLReader::ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aFirst, const CU::String& aSecond, const CU::String& aThird, CU::Vector3<T>& aTargetVariable)
 {
 	if (myHasOpenedDoc == false)
 		DL_ASSERT("[XMLReader]: Tried to [ReadAttribute(Vector3<T>)] before Opening the document");
@@ -187,8 +187,8 @@ bool XMLReader::ReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, co
 }
 
 template<typename T>
-bool XMLReader::ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aAttributeToRead
-	, const CU::String<80>& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable)
+bool XMLReader::ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aAttributeToRead
+	, const CU::String& aOtherAttributeToRead, CU::Vector2<T>& aTargetVariable)
 {
 	if (myHasOpenedDoc == false)
 		DL_ASSERT("[XMLReader]: Tried to [ReadAttribute(Vector2<T>)] before Opening the document");
@@ -211,8 +211,8 @@ bool XMLReader::ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFro
 }
 
 template<typename T>
-bool XMLReader::ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String<80>& aFirst
-	, const CU::String<80>& aSecond, const CU::String<80>& aThird, CU::Vector3<T>& aTargetVariable)
+bool XMLReader::ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFrom, const CU::String& aFirst
+	, const CU::String& aSecond, const CU::String& aThird, CU::Vector3<T>& aTargetVariable)
 {
 	if (myHasOpenedDoc == false)
 		DL_ASSERT("[XMLReader]: Tried to [ReadAttribute(Vector3<T>)] before Opening the document");
@@ -229,7 +229,7 @@ bool XMLReader::ForceReadAttribute(const tinyxml2::XMLElement* aElementToReadFro
 			}
 		}
 	}
-	DL_ASSERT(CU::Concatenate<256>("Failed to read Attribute: [ %s ], [ %s ] and [ %s ] from Element: [ %s ], in Document: [ %s ]", 
+	DL_ASSERT(CU::Concatenate("Failed to read Attribute: [ %s ], [ %s ] and [ %s ] from Element: [ %s ], in Document: [ %s ]", 
 		aFirst.c_str(), aSecond.c_str(), aThird.c_str(), aElementToReadFrom->Name(), myFilePath.c_str()));
 	return false;
 }

@@ -36,9 +36,13 @@ namespace DL_Debug
 		void PrintMessage(const char* aString);
 		void PrintMessageVA(const char *aFormattedString, ...);
 		void DebugMessage(const char *aFileName, int aLine, const char *aFunctionName, const char *aFormattedString, ...);
-		void AssertMessageVA(const char *aFileName, int aLine, const char *aFunctionName, const CU::String<256>& aFormattedString, ...);
-		void AssertMessage(bool aAssertExpression, const char *aFileName, int aLine, const char *aFunctionName, const CU::String<256>& aString);
-		void AssertMessage(const char *aFileName, int aLine, const char *aFunctionName, const CU::String<256>& aString);
+		void AssertMessageVA(const char *aFileName, int aLine, const char *aFunctionName, const CU::String& aFormattedString, ...);
+
+		void AssertMessage(bool aAssertExpression, const char *aFileName, int aLine, const char *aFunctionName, const CU::String& aString);
+		void AssertMessage(const char *aFileName, int aLine, const char *aFunctionName, const CU::String& aString);
+		void AssertMessage(bool aAssertExpression, const char *aFileName, int aLine, const char *aFunctionName, const char* aString);
+		void AssertMessage(const char *aFileName, int aLine, const char *aFunctionName, const char* aString);
+
 		void ShowMessageBox(HWND aHwnd, LPCSTR aText, LPCSTR aTitle, UINT aType);
 	private:
 		Debug();
@@ -46,5 +50,6 @@ namespace DL_Debug
 
 		static Debug* ourInstance;
 		std::ofstream myDebugFile;
+		CU::String myTempString;
 	};
 }

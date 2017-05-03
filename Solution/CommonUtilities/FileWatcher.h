@@ -10,7 +10,7 @@
 
 namespace CU
 {
-	typedef std::function<void(const CU::String<128>&)> callback_function_file;
+	typedef std::function<void(const CU::String&)> callback_function_file;
 
 	class FileWatcher
 	{
@@ -19,28 +19,28 @@ namespace CU
 		~FileWatcher();
 
 		/* Will check the file for includes and add them as well*/
-		bool WatchFileChangeWithDependencies(const CU::String<128>& aFile, callback_function_file aFunctionToCallOnChange);
-		bool WatchFileChange(const CU::String<128>& aFile, callback_function_file aFunctionToCallOnChange);
+		bool WatchFileChangeWithDependencies(const CU::String& aFile, callback_function_file aFunctionToCallOnChange);
+		bool WatchFileChange(const CU::String& aFile, callback_function_file aFunctionToCallOnChange);
 
 
 		void FlushChanges();
 	private:
-		void UpdateChanges(const CU::String<128>& aDir);
-		void OnFolderChange(const CU::String<128>& aDir);
-		bool WatchDirectory(const CU::String<128>& aDir);
-		void OnFileChange(const CU::String<128>& aFile);
-		CU::GrowingArray<WIN32_FIND_DATA> GetAllFilesInFolder(const CU::String<128>& aDir);
+		void UpdateChanges(const CU::String& aDir);
+		void OnFolderChange(const CU::String& aDir);
+		bool WatchDirectory(const CU::String& aDir);
+		void OnFileChange(const CU::String& aFile);
+		CU::GrowingArray<WIN32_FIND_DATA> GetAllFilesInFolder(const CU::String& aDir);
 
 		std::thread* myThread;
 
-		typedef	Map<CU::String<128>, CU::GrowingArray<WIN32_FIND_DATA>> FolderMap;
+		typedef	Map<CU::String, CU::GrowingArray<WIN32_FIND_DATA>> FolderMap;
 		FolderMap myFolders;
 
-		CU::GrowingArray<CU::String<128>> myFileChangedThreaded;
-		CU::GrowingArray<CU::String<128>> myFileChanged;
-		Map<CU::String<128>, CU::GrowingArray<callback_function_file> > myCallbacks;
+		CU::GrowingArray<CU::String> myFileChangedThreaded;
+		CU::GrowingArray<CU::String> myFileChanged;
+		Map<CU::String, CU::GrowingArray<callback_function_file> > myCallbacks;
 
-		typedef Map<CU::String<128>, CU::GrowingArray<CU::String<128>>> Dependencies;
+		typedef Map<CU::String, CU::GrowingArray<CU::String>> Dependencies;
 		Dependencies myDependencies;
 
 		std::mutex myMutex;

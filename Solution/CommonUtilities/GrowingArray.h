@@ -6,8 +6,27 @@
 #define GA_TEMPLATE template<typename ObjectType, typename SizeType = int>
 #define GA_TYPE GrowingArray<ObjectType, SizeType>
 
+
 namespace CU
 {
+
+	enum eGrowingArray_Errors
+	{
+		NOT_INITIALIZED,
+		ALLREADY_INITIALIZED,
+		INVALID_SIZE,
+		LOW_INDEX,
+		HIGH_INDEX,
+		_GROWINGARRAY_ERROR_COUNT,
+	};
+
+	static const char* locGrowingArray_ErrorStrings[_GROWINGARRAY_ERROR_COUNT] = {
+		"Not initialized, run Init first.",
+		"Can't call Init twice, use ReInit() instead",
+		"Invalid size of growingarray",
+		"Index has to be 0 or more.",
+		"a index out of bounds!"
+	};
 
 	GA_TEMPLATE
 	class GrowingArray
@@ -29,6 +48,7 @@ namespace CU
 
 		inline void Add(const ObjectType& aObject);
 		inline void AddEmptyObject();
+		inline void AddUnique(const ObjectType& aObject);
 		inline void Insert(SizeType aIndex, const ObjectType& aObject);
 		inline void InsertFirst(const ObjectType& aObject);
 		inline void DeleteCyclic(ObjectType& aObject);
@@ -68,6 +88,8 @@ namespace CU
 		bool myUseSafeModeFlag;
 		bool myIsInit;
 
+
+		
 	};
 }
 
@@ -81,18 +103,12 @@ namespace CU
 		, myUseSafeModeFlag(true)
 		, myIsInit(false)
 	{
-		//myData = nullptr;
-		//myCurrentSize = 0;
-		//myMaxSize = 0;
-		//myUseSafeModeFlag = true;
-		//myIsInit = false;
 	}
 
 	GA_TEMPLATE
 	inline GA_TYPE::GrowingArray(SizeType aNrOfRecommendedItems, bool aUseSafeModeFlag = true)
 	{
-		DL_ASSERT_EXP(aNrOfRecommendedItems > 0, "Can't create GrowingArray smaller than 1.");
-
+		DL_ASSERT_EXP(aNrOfRecommendedItems > 0, locGrowingArray_ErrorStrings[INVALID_SIZE]);
 		myIsInit = false;
 		Init(aNrOfRecommendedItems, aUseSafeModeFlag);
 	}
@@ -144,8 +160,8 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::Init(SizeType aNrOfRecommendedItems, bool aUseSafeModeFlag = true)
 	{
-		DL_ASSERT_EXP(myIsInit == false, "Can't call Init twice, use ReInit() instead");
-		DL_ASSERT_EXP(aNrOfRecommendedItems > 0, "Can't create GrowingArray smaller than 1.");
+		DL_ASSERT_EXP(myIsInit == false, locGrowingArray_ErrorStrings[ALLREADY_INITIALIZED]);
+		DL_ASSERT_EXP(aNrOfRecommendedItems > 0, locGrowingArray_ErrorStrings[INVALID_SIZE]);
 
 		myIsInit = true;
 		myCurrentSize = 0;
@@ -158,7 +174,7 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::ReInit(SizeType aNrOfRecommendedItems, bool aUseSafeModeFlag = true)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Can't call ReInit before Init.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[ALLREADY_INITIALIZED]);
 		delete[] myData;
 		myIsInit = false;
 		Init(aNrOfRecommendedItems, aUseSafeModeFlag);
@@ -176,25 +192,30 @@ namespace CU
 	GA_TEMPLATE
 	inline ObjectType& GA_TYPE::operator[](const SizeType& aIndex)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aIndex >= 0, "Index has to be 0 or more.");
-		DL_ASSERT_EXP(aIndex < myCurrentSize, "a index out of bounds!");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(aIndex >= 0, locGrowingArray_ErrorStrings[LOW_INDEX]);
+		DL_ASSERT_EXP(aIndex < myCurrentSize, locGrowingArray_ErrorStrings[HIGH_INDEX]);
 		return myData[aIndex];
 	}
 
 	GA_TEMPLATE
 	inline const ObjectType& GA_TYPE::operator[](const SizeType& aIndex) const
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aIndex >= 0, "Index has to be 0 or more.");
-		DL_ASSERT_EXP(aIndex < myCurrentSize, "a index out of bounds!");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(aIndex >= 0, locGrowingArray_ErrorStrings[LOW_INDEX]);
+		DL_ASSERT_EXP(aIndex < myCurrentSize, locGrowingArray_ErrorStrings[HIGH_INDEX]);
 		return myData[aIndex];
 	}
 
 	GA_TEMPLATE
 	inline void GA_TYPE::Add(const ObjectType& aObject)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		if (myIsInit == false)
+		{
+			Init(2);
+		}
+		
+
 		if (myCurrentSize >= myMaxSize)
 		{
 			Resize(myMaxSize * 2);
@@ -205,7 +226,7 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::AddEmptyObject()
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 
 		if (myCurrentSize == myMaxSize)
 		{
@@ -216,11 +237,19 @@ namespace CU
 	}
 
 	GA_TEMPLATE
+	inline void GA_TYPE::AddUnique(const ObjectType& aObject)
+	{
+		if (Find(aObject) == -1)
+			Add(aObject);
+	}
+
+	GA_TEMPLATE
 	inline void GA_TYPE::Insert(SizeType aIndex, const ObjectType& aObject)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aIndex >= 0, "Index has to be 0 or more.");
-		DL_ASSERT_EXP(aIndex < myCurrentSize, "a index out of bounds!");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(aIndex >= 0, locGrowingArray_ErrorStrings[LOW_INDEX]);
+		DL_ASSERT_EXP(aIndex < myCurrentSize, locGrowingArray_ErrorStrings[HIGH_INDEX]);
+
 		if (myCurrentSize >= myMaxSize)
 		{
 			Resize(myMaxSize * 2);
@@ -240,7 +269,7 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::InsertFirst(const ObjectType& aObject)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 		
 		if (myCurrentSize == 0)
 		{
@@ -255,7 +284,9 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::DeleteCyclic(ObjectType& aObject)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		//DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+
 		for (SizeType i = 0; i < myCurrentSize; ++i)
 		{
 			if (myData[i] == aObject)
@@ -270,9 +301,10 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::DeleteCyclicAtIndex(SizeType aItemNumber)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aItemNumber >= 0, "Index has to be 0 or more.");
-		DL_ASSERT_EXP(aItemNumber < myCurrentSize, "a index out of bounds!");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(aItemNumber >= 0, locGrowingArray_ErrorStrings[LOW_INDEX]);
+		DL_ASSERT_EXP(aItemNumber < myCurrentSize, locGrowingArray_ErrorStrings[HIGH_INDEX]);
+
 		delete myData[aItemNumber];
 		myData[aItemNumber] = nullptr;
 		myData[aItemNumber] = myData[--myCurrentSize];
@@ -281,9 +313,10 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::DeleteNonCyclicAtIndex(SizeType aItemNumber)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aItemNumber >= 0, "Index has to be 0 or more.");
-		DL_ASSERT_EXP(aItemNumber < myCurrentSize, "a index out of bounds!");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(aItemNumber >= 0, locGrowingArray_ErrorStrings[LOW_INDEX]);
+		DL_ASSERT_EXP(aItemNumber < myCurrentSize, locGrowingArray_ErrorStrings[HIGH_INDEX]);
+
 		delete myData[aItemNumber];
 		myData[aItemNumber] = nullptr;
 
@@ -298,7 +331,7 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::RemoveCyclic(const ObjectType& aObject)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 
 		for (SizeType i = 0; i < myCurrentSize; ++i)
 		{
@@ -314,16 +347,17 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::RemoveCyclicAtIndex(SizeType aItemNumber)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aItemNumber >= 0, "Index has to be 0 or more.");
-		DL_ASSERT_EXP(aItemNumber < myCurrentSize, "a index out of bounds!");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(aItemNumber >= 0, locGrowingArray_ErrorStrings[LOW_INDEX]);
+		DL_ASSERT_EXP(aItemNumber < myCurrentSize, locGrowingArray_ErrorStrings[HIGH_INDEX]);
+
 		myData[aItemNumber] = myData[--myCurrentSize];
 	}
 
 	GA_TEMPLATE
 	inline void GA_TYPE::RemoveNonCyclic(const ObjectType& aObject)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 
 		for (SizeType i = 0; i < myCurrentSize; ++i)
 		{
@@ -340,9 +374,9 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::RemoveNonCyclicAtIndex(SizeType aItemNumber)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aItemNumber >= 0, "Index has to be 0 or more.");
-		DL_ASSERT_EXP(aItemNumber < myCurrentSize, "a index out of bounds!");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(aItemNumber >= 0, locGrowingArray_ErrorStrings[LOW_INDEX]);
+		DL_ASSERT_EXP(aItemNumber < myCurrentSize, locGrowingArray_ErrorStrings[HIGH_INDEX]);
 
 		for (SizeType i = aItemNumber; i < myCurrentSize - 1; ++i)
 		{
@@ -354,7 +388,7 @@ namespace CU
 	GA_TEMPLATE
 	inline SizeType GA_TYPE::Find(const ObjectType& aObject) const
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 
 		for (SizeType i = 0; i < myCurrentSize; ++i)
 		{
@@ -369,28 +403,26 @@ namespace CU
 	GA_TEMPLATE
 	inline ObjectType& GA_TYPE::GetLast()
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 		return myData[myCurrentSize - 1];
 	}
 
 	GA_TEMPLATE
 	inline const ObjectType& GA_TYPE::GetLast() const
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 		return myData[myCurrentSize - 1];
 	}
 
 	GA_TEMPLATE
 	inline void GA_TYPE::RemoveAll()
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
 		myCurrentSize = 0;
 	}
 
 	GA_TEMPLATE
 	inline void GA_TYPE::DeleteAll()
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
 		for (SizeType i = 0; i < myCurrentSize; ++i)
 		{
 			delete myData[i];
@@ -402,7 +434,7 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::Optimize()
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
 		myMaxSize = myCurrentSize;
 		if (myMaxSize < 1)
 		{
@@ -426,8 +458,8 @@ namespace CU
 	GA_TEMPLATE
 	inline void GA_TYPE::Resize(int aNewSize)
 	{
-		DL_ASSERT_EXP(myIsInit == true, "Not initialized, run Init first.");
-		DL_ASSERT_EXP(aNewSize > 0, "Can't make GrowingArray smaller than 1.");
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[NOT_INITIALIZED]);
+		DL_ASSERT_EXP(myIsInit == true, locGrowingArray_ErrorStrings[INVALID_SIZE]);
 
 		ObjectType* newData = new ObjectType[aNewSize];
 		if (myUseSafeModeFlag == true)

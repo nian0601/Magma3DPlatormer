@@ -94,9 +94,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonUtilities\CommonUtilities.vcxproj">
-      <Project>{32412318-0112-4dce-87c5-86ca64df6630}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.vcxproj">
       <Project>{fe86362f-e4c6-422a-9d7e-123ae160651e}</Project>
     </ProjectReference>

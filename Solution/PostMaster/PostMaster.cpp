@@ -19,7 +19,7 @@ PostMaster::~PostMaster()
 	{
 		if (mySubscribers[i].mySubscribers.Size() > 0)
 		{
-			DL_ASSERT(CU::Concatenate<256>("Subscriber not unsubscribed at flag %i at Postmaster-Destroy", mySubscribers[i].myFlag));
+			DL_ASSERT(CU::Concatenate("Subscriber not unsubscribed at flag %i at Postmaster-Destroy", mySubscribers[i].myFlag));
 		}
 
 		mySubscribers[i].mySubscribers.RemoveAll();
@@ -65,7 +65,7 @@ void PostMaster::Subscribe(Subscriber* aSubscriber, int someMessageFlags)
 		}
 	}
 
-	DL_ASSERT_EXP(success == true, CU::Concatenate<256>("Cant subscribe with flags %i", someMessageFlags));
+	DL_ASSERT_EXP(success == true, CU::Concatenate("Cant subscribe with flags %i", someMessageFlags));
 }
 
 void PostMaster::UnSubscribe(Subscriber* aSubscriber, int someMessageFlags)
@@ -84,14 +84,14 @@ void PostMaster::UnSubscribe(Subscriber* aSubscriber, int someMessageFlags)
 		}
 		else if ((info.myFlag & someMessageFlags) > 0)
 		{
-			DL_ASSERT_EXP(info.mySubscribers.Find(aSubscriber) != info.mySubscribers.FoundNone, CU::Concatenate<256>("Cant unsubscribe with flag %i", info.myFlag));
+			DL_ASSERT_EXP(info.mySubscribers.Find(aSubscriber) != info.mySubscribers.FoundNone, CU::Concatenate("Cant unsubscribe with flag %i", info.myFlag));
 
 			success = true;
 			info.mySubscribers.RemoveCyclic(aSubscriber);
 		}
 	}
 
-	DL_ASSERT_EXP(success == true, CU::Concatenate<256>("Cant unsubscribe with flag %i", someMessageFlags));
+	DL_ASSERT_EXP(success == true, CU::Concatenate("Cant unsubscribe with flag %i", someMessageFlags));
 }
 
 bool PostMaster::IsSubscribed(Subscriber* aSubscriber, eMessageType aMessageType)

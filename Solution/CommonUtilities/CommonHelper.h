@@ -11,12 +11,12 @@
 
 namespace CU
 {
-	const CU::String<80> group("/Distortion GamesMagma/");
-	const CU::String<80> game("");
+	const CU::String group("/Distortion GamesMagma/");
+	const CU::String game("");
 
 	static bool canSave;
 	
-	inline bool dirExists(const CU::String<80>& dirName_in)
+	inline bool dirExists(const CU::String& dirName_in)
 	{
 		DWORD ftyp = GetFileAttributesA(dirName_in.c_str());
 		if (ftyp == INVALID_FILE_ATTRIBUTES)
@@ -28,19 +28,19 @@ namespace CU
 		return false;    // this is not a directory!
 	}
 
-	inline void BuildFoldersInPath(const CU::String<80>& aPath)
+	inline void BuildFoldersInPath(const CU::String& aPath)
 	{
 		unsigned int slashIndex = aPath.Find("/");
 
 		while (slashIndex != aPath.NotFound)
 		{
-			CU::String<80> folder = aPath.SubStr(0, slashIndex);
+			CU::String folder = aPath.SubStr(0, slashIndex);
 			CreateDirectory(folder.c_str(), NULL);
 			slashIndex = aPath.Find("/", slashIndex + 1);
 		}
 	}
 
-	inline bool FileExists(const CU::String<80>& name) {
+	inline bool FileExists(const CU::String& name) {
 		std::ifstream f(name.c_str());
 		if (f.good()) {
 			f.close();
@@ -60,7 +60,7 @@ namespace CU
 			DL_ASSERT("Can't get document folder!");
 		}
 
-		CU::String<80> directory(documents);
+		CU::String directory(documents);
 		directory += group;
 		directory += game;
 		if (dirExists(directory) == false)
@@ -69,7 +69,7 @@ namespace CU
 		}
 	}
 
-	inline void CreateFileIfNotExists(const CU::String<80>& aFilePath)
+	inline void CreateFileIfNotExists(const CU::String& aFilePath)
 	{
 		if (FileExists(aFilePath) == false)
 		{
@@ -79,7 +79,7 @@ namespace CU
 		}
 	}
 
-	inline CU::String<80> GetMyDocumentFolderPath()
+	inline CU::String GetMyDocumentFolderPath()
 	{
 		char documents[MAX_PATH];
 		HRESULT hr = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, documents);
@@ -88,7 +88,7 @@ namespace CU
 			DL_ASSERT("Can't get document folder!");
 		}
 
-		CU::String<80> output(documents);
+		CU::String output(documents);
 		output += group + game;
 		return output;
 	}
@@ -103,10 +103,9 @@ namespace CU
 		return max(aLower, min(aNumber, aUpper));
 	}
 
-	template<unsigned int MaxSize = 80>
-	inline CU::String<80> GetSubString(const CU::String<MaxSize>& aStringToReadFrom, char aCharToFind, bool aReadAfterChar)
+	inline CU::String GetSubString(const CU::String& aStringToReadFrom, char aCharToFind, bool aReadAfterChar)
 	{
-		CU::String<MaxSize> toReturn;
+		CU::String toReturn;
 		if (aReadAfterChar == false)
 		{
 			toReturn = aStringToReadFrom.SubStr(0, aStringToReadFrom.Find(aCharToFind)-1);
@@ -119,8 +118,7 @@ namespace CU
 		return toReturn;
 	}
 
-	template<unsigned int MaxSize = 80>
-	inline CU::String<MaxSize> GetSubString(const CU::String<MaxSize>& aStringToReadFrom, const CU::String<MaxSize>& aWordToFind, bool aReadAfterChar
+	inline CU::String GetSubString(const CU::String& aStringToReadFrom, const CU::String& aWordToFind, bool aReadAfterChar
 		, int someCharsToSkip = 0)
 	{
 		int index = aStringToReadFrom.RFind(aWordToFind);
@@ -139,9 +137,9 @@ namespace CU
 
 	//If OptionalExtension is blank, the outputstring will have the same extension as the input string
 	//OptionalExtension needs to be entered without a period, "xml", NOT ".xml"
-	inline CU::String<80> GetGeneratedDataFolderFilePath(const CU::String<80>& aFilePath, const CU::String<80>& anOptionalNewExtension = "")
+	inline CU::String GetGeneratedDataFolderFilePath(const CU::String& aFilePath, const CU::String& anOptionalNewExtension = "")
 	{
-		CU::String<80> pathWithoutData = aFilePath.SubStr(5, aFilePath.Size());
+		CU::String pathWithoutData = aFilePath.SubStr(5, aFilePath.Size());
 
 		if (anOptionalNewExtension.Empty() == false)
 		{
@@ -151,7 +149,7 @@ namespace CU
 			pathWithoutData += anOptionalNewExtension;
 		}
 
-		CU::String<80> generatedDataFilePath = "GeneratedData/";
+		CU::String generatedDataFilePath = "GeneratedData/";
 		generatedDataFilePath += pathWithoutData;
 
 		return generatedDataFilePath;
@@ -159,9 +157,9 @@ namespace CU
 
 	//If OptionalExtension is blank, the outputstring will have the same extension as the input string
 	//OptionalExtension needs to be entered without a period, "xml", NOT ".xml"
-	inline CU::String<80> GetRealDataFolderFilePath(const CU::String<80>& aFilePath, const CU::String<80>& anOptionalNewExtension = "")
+	inline CU::String GetRealDataFolderFilePath(const CU::String& aFilePath, const CU::String& anOptionalNewExtension = "")
 	{
-		CU::String<80> pathWithoutData = aFilePath.SubStr(14, aFilePath.Size());
+		CU::String pathWithoutData = aFilePath.SubStr(14, aFilePath.Size());
 
 		if (anOptionalNewExtension.Empty() == false)
 		{
@@ -171,14 +169,13 @@ namespace CU
 			pathWithoutData += anOptionalNewExtension;
 		}
 
-		CU::String<80> generatedDataFilePath = "Data/";
+		CU::String generatedDataFilePath = "Data/";
 		generatedDataFilePath += pathWithoutData;
 
 		return generatedDataFilePath;
 	}
 	
-	template<unsigned int MaxSize = 30>
-	inline CU::String<MaxSize> Concatenate(const char* aFormattedString, ...)
+	inline CU::String Concatenate(const char* aFormattedString, ...)
 	{
 		char buffer[1024];
 		va_list args;
@@ -192,7 +189,7 @@ namespace CU
 		return buffer;
 	}
 
-	inline void TrimWhiteSpacesAtBeginAndEnd(CU::String<80>& aString)
+	inline void TrimWhiteSpacesAtBeginAndEnd(CU::String& aString)
 	{
 		if (aString.Empty() == true)
 		{
@@ -240,11 +237,22 @@ namespace CU
 			|| aValue == 1024 * 6;
 	}
 
-	inline CU::String<64> GetFileNameFromFilePath(const CU::String<64>& aFilePath)
+	inline CU::String GetFileNameFromFilePath(const CU::String& aFilePath)
 	{
 		int index = aFilePath.RFind("/") + 1;
 
-		CU::String<64> result = aFilePath.SubStr(index, aFilePath.Size());
+		CU::String result = aFilePath.SubStr(index, aFilePath.Size());
 		return result;
+	}
+
+	inline CU::String ReplaceExtension(const CU::String& aFilePath, const CU::String& aNewExtension)
+	{
+		CU::String newString = aFilePath;
+		int extensionIndex = newString.RFind(".");
+		newString = newString.SubStr(0, extensionIndex);
+
+		newString += aNewExtension;
+
+		return newString;
 	}
 }

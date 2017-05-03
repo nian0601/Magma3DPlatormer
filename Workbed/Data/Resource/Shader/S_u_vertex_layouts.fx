@@ -28,13 +28,13 @@ struct Pixel_Model
 	float4 WorldPosition : POSITION;
 };
 
-struct Vertex_FullscreenQuad
+struct Vertex_Quad
 {
 	float4 Pos : POSITION;
 	float2 Tex : TEXCOORD;
 };
 
-struct Pixel_FullscreenQuad
+struct Pixel_Quad
 {
 	float4 Pos : SV_POSITION;
 	float2 Tex : TEXCOORD;
@@ -50,7 +50,6 @@ struct Pixel_LightMesh
 	float4 Position : SV_POSITION;
 	float4 Tex : POSITION;
 };
-
 
 struct GBuffer
 {

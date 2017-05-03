@@ -1,6 +1,6 @@
 #pragma once
 #include "Message.h"
-#include <EngineTypes.h>
+#include <Types.h>
 #include <Matrix.h>
 #include <Vector.h>
 

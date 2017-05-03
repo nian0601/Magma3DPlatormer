@@ -59,7 +59,7 @@ void PostMaster::SendMessage(const Message& aMessage)
 				//&& aMessage.myMessageType != eMessageType::RESIZE
 				)
 			{
-				DL_ASSERT(CU::Concatenate<256>("Cant send message %i without subscriber", aMessage.myMessageType));
+				DL_ASSERT(CU::Concatenate("Cant send message %i without subscriber", aMessage.myMessageType));
 			}
 #endif
 

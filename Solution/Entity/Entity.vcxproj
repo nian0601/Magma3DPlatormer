@@ -96,9 +96,6 @@
     <ClCompile Include="TranslationComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonUtilities\CommonUtilities.vcxproj">
-      <Project>{32412318-0112-4dce-87c5-86ca64df6630}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\PostMaster\PostMaster.vcxproj">
       <Project>{ef362edc-8fff-400b-a5ff-05a9bc551d65}</Project>
     </ProjectReference>
